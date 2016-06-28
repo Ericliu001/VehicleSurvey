@@ -12,13 +12,21 @@ import java.util.Map;
 public enum VehicleFinder {
     INSTANCE;
 
-    public static final double VEHICLE_WHEEL_BASE_LENGTH = 2.5;
+    public static final double VEHICLE_WHEEL_BASE_LENGTH = 2.5; // meter
     public static final double SPEED = 60; // km/h
-    public static final double AVG_VEHICLE_PASSING_TIME_INTERVAL = VEHICLE_WHEEL_BASE_LENGTH / (SPEED * 1000 / (3600 * 1000));
+    public static final double AVG_VEHICLE_PASSING_TIME_INTERVAL = VEHICLE_WHEEL_BASE_LENGTH / (SPEED * 1000 / (3600 * 1000)); // millisecond
 
     public Map<String, List<List<Interval>>> mVehicleRecordsMap;
 
 
+    /**
+     * get a list of vehicle hits in a period of time on a certain day by one sensor
+     * @param sensorName the sensor's identifier
+     * @param day the day when the data is collected
+     * @param startTime the starting time of this period
+     * @param endTime the end time of this period
+     * @return a list of Intervals representing vehicle hits
+     */
     public List<Interval> getVehicleRecords(String sensorName, int day, long startTime, long endTime) {
         Map<String, List<List<Interval>>> map = VehicleFinder.INSTANCE.createIntervalMap();
         List<List<Interval>> listList = map.get(sensorName);

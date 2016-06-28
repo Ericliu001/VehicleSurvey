@@ -26,6 +26,15 @@ public class DataParser {
     }
 
 
+    /**
+     * get a map of Lists,
+     *
+     * the key is the sensor identifier
+     * the value is a list, representing data collected in day 0, 1, 2, 3 ....
+     * each day has a list of long values
+     *
+     * @return
+     */
     public static Map<String, List<List<Long>>> getCountByDay() {
         Map<String, List<List<Long>>> countByDay = new HashMap<>();
         Map<String, List<String>> rawMap = getRawDataListMap(false);
@@ -49,6 +58,15 @@ public class DataParser {
 
     }
 
+
+    /**
+     * get a list of data, representing data collected from day 0, 1, 2, 3 ...
+     *
+     *
+     *
+     * @param rawList a list of String data collected from one sensor across the whole period
+     * @return a list of data, consists of data collected from day 0, 1, 2, 3 ...
+     */
     private static List<List<String>> createListsByDay(List<String> rawList) {
         List<List<String>> listsByDayString = new ArrayList<>();
         List<String> temp;
@@ -74,6 +92,13 @@ public class DataParser {
         return listsByDayString;
     }
 
+    /**
+     * separate data into different lists, each consists of data collected by one sensor, then
+     * create an map with the key is sensor identifier and the data is the list
+     *
+     * @param forceUpdate to read the file again or not.
+     * @return
+     */
     public static Map<String, List<String>> getRawDataListMap(boolean forceUpdate) {
         if (mDataMap != null && !forceUpdate) {
             // if the cached data is not null, we just return it to save the cost of reading and parsing file.
