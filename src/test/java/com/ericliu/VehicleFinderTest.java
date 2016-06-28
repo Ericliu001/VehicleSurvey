@@ -11,7 +11,7 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
 /**
- * Created by L078865 on 28/06/2016.
+ * Created by ericliu on 28/06/2016.
  */
 public class VehicleFinderTest {
     @Before

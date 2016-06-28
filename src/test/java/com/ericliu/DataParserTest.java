@@ -11,7 +11,7 @@ import static junit.framework.TestCase.assertNotNull;
 import static junit.framework.TestCase.assertTrue;
 
 /**
- * Created by L078865 on 27/06/2016.
+ * Created by ericliu on 27/06/2016.
  */
 public class DataParserTest {
     @Before
