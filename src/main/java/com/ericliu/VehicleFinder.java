@@ -37,7 +37,7 @@ public enum VehicleFinder {
         List<Interval> intervalList = listList.get(day);
         List<Interval> subList = findSubList(intervalList, startTime, endTime);
 
-        return new ArrayList<>(subList); // clone the list
+        return new ArrayList<>(subList); // create a new copy of the list to prevent the original data being changed by clients
     }
 
     private List<Interval> findSubList(List<Interval> intervalList, long startTime, long endTime) {
@@ -47,17 +47,23 @@ public enum VehicleFinder {
     }
 
 
-
-
-    public int findUpperBound(List<Interval> intervalList, long target, int low, int high) {
+    /**
+     * Using binary search to find the closest element in the list to a given time
+     * @param intervalList the data source
+     * @param targetTime the time to look up
+     * @param low the lower bound of the search range
+     * @param high the upper bound of the search range
+     * @return
+     */
+    public int findUpperBound(List<Interval> intervalList, long targetTime, int low, int high) {
         int mid;
 
         while (high - low > 1) {
             mid = (low + high) / 2;
             long midTime = intervalList.get(mid).midTime;
-            if (midTime > target) {
+            if (midTime > targetTime) {
                 high = mid;
-            } else if (midTime < target) {
+            } else if (midTime < targetTime) {
                 low = mid;
             } else {
                 return mid;
@@ -67,15 +73,15 @@ public enum VehicleFinder {
         return  high;
     }
 
-    public int findLowerBound(List<Interval> intervalList, long target, int low, int high) {
+    public int findLowerBound(List<Interval> intervalList, long targetTime, int low, int high) {
         int mid;
 
         while (high - low > 1) {
             mid = (low + high) / 2;
             long midTime = intervalList.get(mid).midTime;
-            if (midTime > target) {
+            if (midTime > targetTime) {
                 high = mid;
-            } else if (midTime < target) {
+            } else if (midTime < targetTime) {
                 low = mid;
             } else {
                 return mid;
