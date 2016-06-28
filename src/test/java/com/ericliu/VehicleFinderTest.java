@@ -41,25 +41,25 @@ public class VehicleFinderTest {
         intervalList.add(new Interval(54, 23));
 
 
-        int index1 = VehicleFinder.INSTANCE.binarySearch(intervalList, true, 10, 0, intervalList.size() - 1);
+        int index1 = VehicleFinder.INSTANCE.findUpperBound(intervalList, 10, 0, intervalList.size() - 1);
         assertEquals(1, index1);
 
 
-        int index2 = VehicleFinder.INSTANCE.binarySearch(intervalList, true, 19, 0, intervalList.size() - 1);
+        int index2 = VehicleFinder.INSTANCE.findUpperBound(intervalList, 19, 0, intervalList.size() - 1);
         assertEquals(2, index2);
 
-        int index3 = VehicleFinder.INSTANCE.binarySearch(intervalList, true, 33, 0, intervalList.size() - 1);
+        int index3 = VehicleFinder.INSTANCE.findUpperBound(intervalList, 33, 0, intervalList.size() - 1);
         assertEquals(3, index3);
 
-        int index4 = VehicleFinder.INSTANCE.binarySearch(intervalList, true, 34, 0, intervalList.size() - 1);
+        int index4 = VehicleFinder.INSTANCE.findUpperBound(intervalList, 34, 0, intervalList.size() - 1);
         assertEquals(4, index4);
 
 
-        int index5 = VehicleFinder.INSTANCE.binarySearch(intervalList, true, 55, 0, intervalList.size() - 1);
+        int index5 = VehicleFinder.INSTANCE.findUpperBound(intervalList, 55, 0, intervalList.size() - 1);
         assertEquals(4, index5);
 
 
-        int index6 = VehicleFinder.INSTANCE.binarySearch(intervalList, false, 10, 0, intervalList.size() - 1);
+        int index6 = VehicleFinder.INSTANCE.findLowerBound(intervalList, 10, 0, intervalList.size() - 1);
         assertEquals(0, index6);
     }
 

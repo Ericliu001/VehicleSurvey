@@ -33,12 +33,15 @@ public enum VehicleFinder {
     }
 
     private List<Interval> findSubList(List<Interval> intervalList, long startTime, long endTime) {
-        int startIndex = binarySearch(intervalList, true, startTime, 0, intervalList.size() - 1);
-        int endIndex = binarySearch(intervalList, false, endTime, 0, intervalList.size() - 1);
+        int startIndex = findUpperBound(intervalList, startTime, 0, intervalList.size() - 1);
+        int endIndex = findLowerBound(intervalList, endTime, 0, intervalList.size() - 1);
         return intervalList.subList(startIndex, endIndex);
     }
 
-    public int binarySearch(List<Interval> intervalList, boolean upperBound, long target, int low, int high) {
+
+
+
+    public int findUpperBound(List<Interval> intervalList, long target, int low, int high) {
         int mid;
 
         while (high - low > 1) {
@@ -53,7 +56,25 @@ public enum VehicleFinder {
             }
         }
 
-        return upperBound? high: low;
+        return  high;
+    }
+
+    public int findLowerBound(List<Interval> intervalList, long target, int low, int high) {
+        int mid;
+
+        while (high - low > 1) {
+            mid = (low + high) / 2;
+            long midTime = intervalList.get(mid).midTime;
+            if (midTime > target) {
+                high = mid;
+            } else if (midTime < target) {
+                low = mid;
+            } else {
+                return mid;
+            }
+        }
+
+        return  low;
     }
 
 
