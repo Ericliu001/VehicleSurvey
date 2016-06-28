@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
@@ -25,10 +26,23 @@ public class VehicleFinderTest {
     }
 
     @Test
+    public void testSpeed(){
+        double speedA = VehicleFinder.INSTANCE.getAverageSpeed(DataParser.SENSOR_A, 0, 0, Integer.MAX_VALUE);
+        assertTrue(speedA > 0);
+
+
+        double speedB = VehicleFinder.INSTANCE.getAverageSpeed(DataParser.SENSOR_B, 0, 0, Integer.MAX_VALUE);
+        assertTrue(speedB > 0);
+
+    }
+
+    @Test
     public void getVehicleRecords() throws Exception {
-        List<Interval> vehicleRecords = VehicleFinder.INSTANCE.getVehicleRecords(DataParser.SENSOR_A, 0, 0, 6000000);
-        
-        assertNotNull(vehicleRecords);
+        List<Interval> vehicleRecordsA = VehicleFinder.INSTANCE.getVehicleRecords(DataParser.SENSOR_A, 0, 0, Integer.MAX_VALUE);
+        List<Interval> vehicleRecordsB = VehicleFinder.INSTANCE.getVehicleRecords(DataParser.SENSOR_B, 0, 0, Integer.MAX_VALUE);
+
+        assertNotNull(vehicleRecordsA);
+        assertTrue(vehicleRecordsB.size() > 0);
     }
 
     @Test

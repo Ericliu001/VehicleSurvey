@@ -19,6 +19,23 @@ public enum VehicleFinder {
     public Map<String, List<List<Interval>>> mVehicleRecordsMap;
 
 
+
+
+    public double getAverageSpeed(String sensorName, int day, long startTime, long endTime){
+        List<Interval> intervals = getVehicleRecords(sensorName, day, startTime, endTime);
+        double totalDistance = VEHICLE_WHEEL_BASE_LENGTH * intervals.size(); // meters
+        double totalTimeTaken = 0d; // millisecond
+        for (Interval interval : intervals) {
+            totalTimeTaken += interval.duration;
+        }
+
+        totalDistance = totalDistance/1000; // km
+        totalTimeTaken = (totalTimeTaken/1000)/3600; // hour
+
+        return  totalDistance/totalTimeTaken; // meters/milliseconds = km/
+    }
+
+
     /**
      * get a list of vehicle hits in a period of time on a certain day by one sensor
      * @param sensorName the sensor's identifier
