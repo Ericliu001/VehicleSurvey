@@ -16,8 +16,51 @@ public enum VehicleFinder {
     public static final double SPEED = 60; // km/h
     public static final double AVG_VEHICLE_PASSING_TIME_INTERVAL = VEHICLE_WHEEL_BASE_LENGTH / (SPEED * 1000 / (3600 * 1000));
 
+    public Map<String, List<List<Interval>>> mVehicleRecordsMap;
+
+
+    public List<Interval> getVehicleRecords(String sensorName, int day, long startTime, long endTime) {
+        Map<String, List<List<Interval>>> map = VehicleFinder.INSTANCE.createIntervalMap();
+        List<List<Interval>> listList = map.get(sensorName);
+
+        if (day < 0 || day >= listList.size()) {
+            return null;
+        }
+        List<Interval> intervalList = listList.get(day);
+        List<Interval> subList = findSubList(intervalList, startTime, endTime);
+
+        return new ArrayList<>(subList); // clone the list
+    }
+
+    private List<Interval> findSubList(List<Interval> intervalList, long startTime, long endTime) {
+        int startIndex = binarySearch(intervalList, true, startTime, 0, intervalList.size() - 1);
+        int endIndex = binarySearch(intervalList, false, endTime, 0, intervalList.size() - 1);
+        return intervalList.subList(startIndex, endIndex);
+    }
+
+    public int binarySearch(List<Interval> intervalList, boolean upperBound, long target, int low, int high) {
+        int mid;
+
+        while (high - low > 1) {
+            mid = (low + high) / 2;
+            long midTime = intervalList.get(mid).midTime;
+            if (midTime > target) {
+                high = mid;
+            } else if (midTime < target) {
+                low = mid;
+            } else {
+                return mid;
+            }
+        }
+
+        return upperBound? high: low;
+    }
+
 
     public Map<String, List<List<Interval>>> createIntervalMap() {
+        if (mVehicleRecordsMap != null) {
+            return mVehicleRecordsMap;
+        }
 
         Map<String, List<List<Long>>> longMap = DataParser.getCountByDay();
         Map<String, List<List<Interval>>> intervalMap = new HashMap<>();
@@ -47,10 +90,10 @@ public enum VehicleFinder {
 
             intervalMap.put(key, listsByDay);
         }
-        return intervalMap;
-    }
 
-    
+        mVehicleRecordsMap = intervalMap;
+        return mVehicleRecordsMap;
+    }
 
 
     public boolean isVehiclePass(long duration) {
