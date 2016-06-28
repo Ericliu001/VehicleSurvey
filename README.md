@@ -1,5 +1,4 @@
 # VehicleSurvey
-
 Vehicle Survey Code Challenge 
 
 A small city government recently bought a vehicle counter. In order for the vehicle counter to work, pneumatic rubber hoses are stretched across the road. Data is produced by the vehicle counter as traffic drives across the hoses. The city government requires a program to interpret the data that the machine produces. 
@@ -17,6 +16,7 @@ The data from the machine looks like this:
  B1089810 
  A1089948 
  B1089951 
+ 
  
 The numbers are the number of milliseconds since midnight when the mark occurred. Thus, the first line above represents a pair of tires driving by at 12:04:28am. The second line represents another pair of tires going by 142ms later (almost certainly the 2nd axle of the car). 
 The vehicle counter has two pneumatic rubber hoses - one stretches across both lanes of traffic, and one goes just across traffic in one direction. Each hose independently records when tires drive over it. As such, cars going in one direction (say, northbound) only record on one sensor (preceded with an 'A'), while cars going in the direction (say, southbound) are recorded on both sensors. Lines 3-6 above represent a second car going in the other direction. The first set of tires hit the 'A' sensor at 12:10:04am, and then hit the 'B' sensor 3ms later. The second set of tires then hit the 'A' sensor 171ms later, and then the 'B' sensor 4ms later. 
@@ -37,13 +37,10 @@ The city has asked you to see how many analysis features you can provide:
 
 
 
-Total vehicle counts in each direction: morning versus evening, per hour, per half hour, per 20 minutes, and per 15 minutes. 
-The above counts can be displayed for each day of the session, or you can see averages across all the days. 
-Peak volume times. 
-The (rough) speed distribution of traffic. 
-Rough distance between cars during various periods. 
-Luckily for you, you know that: 
-The speed limit on the road where this is recorded is 60kph (that doesn't mean that everyone drives this speed, or that no one exceeds it, but it's a good starting point). 
-The average wheelbase of cars in the city is around 2.5 metres between axles. 
-Only 2-axle vehicles were allowed on this road during the recording sessions. 
-This coding challenge should be accompanied with a data file containing the full vehicle survey data to be analysed by the program. 
+Total vehicle counts  in each direction: morning versus  evening, per hour, per half  hour, per 20 minutes, and  per 15 minutes.
+The above counts can be displayed  for each day of the session, or you can see averages across  all the days. Peak volume times.
+The (rough) speed distribution of  traffic. Rough distance between cars during various periods. Luckily  for you, you know that:
+The speed limit on the road  where this is recorded is 60kph (that doesn't mean that everyone drives  this speed, or that no one
+exceeds it, but it's a good starting point). The average wheelbase  of cars in the city is around 2.5 metres between axles. Only
+2-axle vehicles  were allowed on this  road during the  recording sessions. This coding  challenge should be accompanied  with a
+data file containing the full vehicle survey data to be analysed by the program.
