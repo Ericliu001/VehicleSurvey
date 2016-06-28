@@ -37,5 +37,12 @@ public class DataParserTest {
         
         DataParser.getCountByDay();
     }
+    
+    @Test
+    public void getIntervalMap(){
+        Map map = VehicleFinder.INSTANCE.createIntervalMap();
+        
+        assertNotNull(map);
+    }
 
 }

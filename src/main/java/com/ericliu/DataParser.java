@@ -19,8 +19,8 @@ public class DataParser {
     public static Map<String, List<String>> mDataMap;
 
     public static final String FILENAME = "Vehicle Survey Coding Challenge sample data.txt";
-    public static final String REGEX_A = "A{1}\\d*";
-    public static final String REGEX_B = "B{1}\\d*";
+    public static final String REGEX_A = SENSOR_A + "{1}\\d*";
+    public static final String REGEX_B = SENSOR_B + "{1}\\d*";
 
     private DataParser() {
     }
@@ -44,7 +44,7 @@ public class DataParser {
             }
             countByDay.put(key, listsByDayLong);
         }
-        
+
         return countByDay;
 
     }
@@ -64,18 +64,18 @@ public class DataParser {
                 start = i + 1;
                 listsByDayString.add(temp);
             }
-            
-            if ( (i + 1) == rawList.size() - 1){
+
+            if ((i + 1) == rawList.size() - 1) {
                 temp = rawList.subList(start, i + 1);
                 listsByDayString.add(temp);
             }
         }
-        
+
         return listsByDayString;
     }
 
     public static Map<String, List<String>> getRawDataListMap(boolean forceUpdate) {
-        if (mDataMap != null && ! forceUpdate) {
+        if (mDataMap != null && !forceUpdate) {
             // if the cached data is not null, we just return it to save the cost of reading and parsing file.
             return mDataMap;
         }

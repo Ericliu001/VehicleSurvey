@@ -5,6 +5,12 @@ package com.ericliu;
  */
 
 public class Interval {
-    private long midTime;
-    private long duration;
+    public final long midTime;
+    public final long duration;
+    
+    public Interval(long midTime, long duration){
+
+        this.midTime = midTime;
+        this.duration = duration;
+    }
 }
